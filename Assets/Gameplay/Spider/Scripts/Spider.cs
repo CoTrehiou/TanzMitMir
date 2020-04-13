@@ -16,19 +16,21 @@ public abstract class Spider : MonoBehaviour
 
     protected int _moveSpeed;
 
-    public  struct OptionsMovement
-    {
-        public Position UP;
-        public Position DOWN;
-        public Position LEFT;
-        public Position RIGHT;
-    }
+
     public struct Position
     {
         public int X;
         public int Y;
     }
-    protected OptionsMovement _optionsMovement;
+
+    public enum Direction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+    }
+    protected Direction _optionsMovement;
     public Position _currentPosition;
 
     protected void SpiderInit(Position positionInitial, int health, int damage, int team, int moveSpeed)
@@ -40,7 +42,7 @@ public abstract class Spider : MonoBehaviour
         _moveSpeed = moveSpeed;
     }
 
-    protected void MoveNextPosition()
+    protected void ChooseNextPosition()
     {
         // Position nextPosition = new Position(Random.Range(_moveSpeed, - _moveSpeed), Random.Range(_moveSpeed, -_moveSpeed));
         int nextPosition = UnityEngine.Random.Range(0, 4);
@@ -48,27 +50,54 @@ public abstract class Spider : MonoBehaviour
         switch (nextPosition)
         {
             case 0:
-                Interact(_optionsMovement.UP);
+                Interact(Direction.UP);
                 break;
             case 1:
-                Interact(_optionsMovement.DOWN);
+                Interact(Direction.DOWN);
                 break;
             case 2:
-                Interact(_optionsMovement.LEFT);
+                Interact(Direction.LEFT);
                 break;
             case 3:
-                Interact(_optionsMovement.RIGHT);
+                Interact(Direction.RIGHT);
                 break;
             default:
                 Debug.Log("Error return value");
                 break;
-
         }
-
     }
 
-    private void Interact(Position typePosition)
+    private void Interact(Direction direction)
     {
-        throw new NotImplementedException();
+        switch (direction)
+        {
+            case Direction.UP:
+                break;
+            case Direction.DOWN:
+                break;
+            case Direction.LEFT:
+                break;
+            case Direction.RIGHT:
+                break;
+        }
+            
     }
+}
+
+public struct Position
+{
+    public Position(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public int X { get; }
+    public int Y { get; }
+
+
+    /*  public Position UP;
+      public Position DOWN;
+      public Position LEFT;
+      public Position RIGHT;*/
 }
