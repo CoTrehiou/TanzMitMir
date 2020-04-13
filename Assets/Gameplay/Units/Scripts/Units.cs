@@ -67,7 +67,7 @@ public abstract class Units : MonoBehaviour
         }
     }
 
-    private void Interact(Direction direction)
+    protected void Interact(Direction direction)
     {
         switch (direction)
         {
@@ -86,10 +86,38 @@ public abstract class Units : MonoBehaviour
         }
     }
 
-    private void CheckPosition(int x, int v)
+    protected void CheckPosition(int x, int y)
+    {
+        switch (Board.boardInstance._tabTiles[x, y]._tileState)
+        {
+            case Tile.TileState.Empty:
+                Move(x, y);
+                break;
+            case Tile.TileState.Unit:
+                Attack(x,y);
+                break;
+            case Tile.TileState.Wall:
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void Move(int x, int y)
+    {
+        Position newPosition = new Position(x, y);
+        transform.Translate(new Vector3(x, y));
+        Board.boardInstance._tabTiles[x, y].SetStateTile(newPosition, Tile.TileState.Unit);
+        Board.boardInstance._tabTiles[_currentPosition.X, _currentPosition.Y].SetStateTile(new Position(_currentPosition.X, _currentPosition.Y), Tile.TileState.Empty);
+        _currentPosition = newPosition;
+    }
+    private void Attack(int x, int y)
     {
         throw new NotImplementedException();
     }
+
+
+
 }
 
 
