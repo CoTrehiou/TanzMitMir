@@ -12,7 +12,7 @@ public abstract class Spider : MonoBehaviour
 
     public bool alive = true;
 
-    protected int _team;
+    protected Team _team;
 
     protected int _moveSpeed;
 
@@ -30,10 +30,17 @@ public abstract class Spider : MonoBehaviour
         LEFT,
         RIGHT,
     }
+
+    public enum Team
+    {
+        RED,
+        BLUE
+    }
+
     protected Direction _optionsMovement;
     public Position _currentPosition;
 
-    protected void SpiderInit(Position positionInitial, int health, int damage, int team, int moveSpeed)
+    protected void SpiderInit(Position positionInitial, int health, int damage, Team team, int moveSpeed)
     {
         _currentPosition = positionInitial;
         _health = health;
@@ -44,7 +51,6 @@ public abstract class Spider : MonoBehaviour
 
     protected void ChooseNextPosition()
     {
-        // Position nextPosition = new Position(Random.Range(_moveSpeed, - _moveSpeed), Random.Range(_moveSpeed, -_moveSpeed));
         int nextPosition = UnityEngine.Random.Range(0, 4);
         Debug.Log(nextPosition);
         switch (nextPosition)
@@ -72,15 +78,23 @@ public abstract class Spider : MonoBehaviour
         switch (direction)
         {
             case Direction.UP:
+                CheckPosition(_currentPosition.X, _currentPosition.Y + 1);
                 break;
             case Direction.DOWN:
+                CheckPosition(_currentPosition.X, _currentPosition.Y - 1);
                 break;
             case Direction.LEFT:
+                CheckPosition(_currentPosition.X - 1, _currentPosition.Y);
                 break;
             case Direction.RIGHT:
+                CheckPosition(_currentPosition.X + 1, _currentPosition.Y);
                 break;
         }
-            
+    }
+
+    private void CheckPosition(int x, int v)
+    {
+        throw new NotImplementedException();
     }
 }
 
@@ -94,10 +108,4 @@ public struct Position
 
     public int X { get; }
     public int Y { get; }
-
-
-    /*  public Position UP;
-      public Position DOWN;
-      public Position LEFT;
-      public Position RIGHT;*/
 }
