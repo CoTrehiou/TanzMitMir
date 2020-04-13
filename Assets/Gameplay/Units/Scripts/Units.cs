@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spider : MonoBehaviour
+public abstract class Units : MonoBehaviour
 {
 
 
@@ -16,12 +16,6 @@ public abstract class Spider : MonoBehaviour
 
     protected int _moveSpeed;
 
-
-    public struct Position
-    {
-        public int X;
-        public int Y;
-    }
 
     public enum Direction
     {
@@ -98,14 +92,4 @@ public abstract class Spider : MonoBehaviour
     }
 }
 
-public struct Position
-{
-    public Position(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
 
-    public int X { get; }
-    public int Y { get; }
-}
