@@ -245,6 +245,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planeGround: {fileID: 524430692}
-  width: 100
-  height: 100
-  _tileState: 0
+  width: 5
+  height: 5

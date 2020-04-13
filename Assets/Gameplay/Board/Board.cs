@@ -5,34 +5,41 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
 
+
+    public  static Board boardInstance;
     [SerializeField] Transform _planeGround;
     [SerializeField] int width = 10;
     [SerializeField] int height = 10;
+
+    public Tile[,] _tabTiles;
+    Position[] tabPosition;
 
 
 
 
     void Awake()
     {
-        _planeGround.localScale = new Vector3(width,0, height);
+      
+        boardInstance = this;
+        _planeGround.localScale = new Vector3(width, 0, height);
+        _tabTiles = new Tile[width,height];
+        Debug.Log("Tableau initialisée avec " + width * height + " cases");
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                _tabTiles[i, j] = new Tile(i,j);
+            }
+        }
     }
 
-    /*
-    TileState Tile(Position position) {
-        if()
-    }
-    */
 }
 
-public class Tile{
+public class Tile
+{
     public Position _positionTile;
     public TileState _tileState;
 
-    public void InitTile(int positionX, int positionY)
-    {
-        _positionTile.X = positionX;
-        _positionTile.Y = positionY;
-    }
     public enum TileState
     {
         Empty,
@@ -40,10 +47,23 @@ public class Tile{
         Wall
     }
 
+    public Tile(int positionX, int positionY)
+    {
+        _positionTile.X = positionX;
+        _positionTile.Y = positionY;
+        _tileState = TileState.Empty;
+    }
+
     TileState GetTile(Position position)
     {
-        return _tileState;
+        return Board.boardInstance._tabTiles[position.X, position.Y]._tileState;
+    }
+
+    void SetStateTile(Position position,Tile.TileState state)
+    {
+        Board.boardInstance._tabTiles[position.X, position.Y]._tileState = state;
     }
 }
+
 
 
