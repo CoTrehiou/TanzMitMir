@@ -8,7 +8,7 @@ public class Tile
     public Position _positionTile;
     public TileState _tileState;
 
-    Unit _unitAssigned = null;
+    public Unit _unitAssigned = null;
 
     public enum TileState
     {

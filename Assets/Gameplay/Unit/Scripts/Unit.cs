@@ -5,8 +5,6 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
-
-
     protected int _health = 100;
     protected int _damage = 50;
     protected bool alive = true;
@@ -30,7 +28,7 @@ public abstract class Unit : MonoBehaviour
     protected Direction _optionsMovement;
     public Position _currentPosition;
 
-    protected void SpiderInit(Position positionInitial, int health, int damage, Team team, int moveSpeed)
+    protected Unit(Position positionInitial, int health, int damage, Team team, int moveSpeed)
     {
         _currentPosition = positionInitial;
         _health = health;
@@ -112,7 +110,26 @@ public abstract class Unit : MonoBehaviour
     }
     protected virtual void Attack(int x, int y)
     {
-        
+        Tile tileEnnemy = Board.boardInstance._tabTiles[_currentPosition.X, _currentPosition.Y];
+        if (tileEnnemy._unitAssigned._team != this._team)
+        {
+            tileEnnemy._unitAssigned.Damaged(_damage);
+        }
+    }
+
+    protected void Damaged(int damage)
+    {
+        _health -= damage;
+        if(_health <= 0)
+        {
+            Die();
+        }
+    }
+
+    protected void Die()
+    {
+        gameObject.SetActive(false);
+        Board.boardInstance.RemoveUnitToTile(_currentPosition);
     }
 }
 

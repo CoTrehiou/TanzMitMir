@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    public readonly List<Unit> unitsList = new List<Unit>();
+    //public readonly List<Unit> unitsList = new List<Unit>();
 
     void Awake()
     {
