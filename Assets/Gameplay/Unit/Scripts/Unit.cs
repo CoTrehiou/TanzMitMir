@@ -3,19 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Units : MonoBehaviour
+public abstract class Unit : MonoBehaviour
 {
 
 
     protected int _health = 100;
     protected int _damage = 50;
-
-    public bool alive = true;
-
+    protected bool alive = true;
     protected Team _team;
-
     protected int _moveSpeed;
-
 
     public enum Direction
     {
@@ -109,15 +105,15 @@ public abstract class Units : MonoBehaviour
         transform.Translate(new Vector3(x, y));
         Board.boardInstance._tabTiles[x, y].SetStateTile(newPosition, Tile.TileState.Unit);
         Board.boardInstance._tabTiles[_currentPosition.X, _currentPosition.Y].SetStateTile(new Position(_currentPosition.X, _currentPosition.Y), Tile.TileState.Empty);
+        
+        Board.boardInstance.RemoveUnitToTile(_currentPosition);
         _currentPosition = newPosition;
+        Board.boardInstance.AssignUnitToTile(this, _currentPosition);
     }
-    private void Attack(int x, int y)
+    protected virtual void Attack(int x, int y)
     {
-        throw new NotImplementedException();
+        
     }
-
-
-
 }
 
 

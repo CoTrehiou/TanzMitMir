@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class Tile
 {
     public Position _positionTile;
     public TileState _tileState;
+
+    Unit _unitAssigned = null;
 
     public enum TileState
     {
@@ -29,5 +32,15 @@ public class Tile
     public void SetStateTile(Position position, Tile.TileState state)
     {
         Board.boardInstance._tabTiles[position.X, position.Y]._tileState = state;
+    }
+
+    internal void AssignUnit(Unit unit, Position unitPosition)
+    {
+        _unitAssigned = unit;
+    }
+
+    internal void RemoveUnit()
+    {
+        _unitAssigned = null;
     }
 }

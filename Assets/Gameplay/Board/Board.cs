@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-
 
     public  static Board boardInstance;
     [SerializeField] Transform _planeGround;
@@ -12,10 +12,6 @@ public class Board : MonoBehaviour
     [SerializeField] int height = 10;
 
     public Tile[,] _tabTiles;
-    Position[] tabPosition;
-
-
-
 
     void Awake()
     {
@@ -33,6 +29,15 @@ public class Board : MonoBehaviour
         }
     }
 
+    public void AssignUnitToTile(Unit unit, Position unitPosition)
+    {
+        _tabTiles[unitPosition.X, unitPosition.Y].AssignUnit(unit, unitPosition);
+    }
+
+    public void RemoveUnitToTile(Position unitPosition)
+    {
+        _tabTiles[unitPosition.X, unitPosition.Y].RemoveUnit();
+    }
 }
 
 
