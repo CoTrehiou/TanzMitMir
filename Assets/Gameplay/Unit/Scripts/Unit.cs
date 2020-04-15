@@ -11,6 +11,8 @@ public abstract class Unit : MonoBehaviour
     protected Team _team;
     protected int _moveSpeed;
 
+    [SerializeField] MeshRenderer _meshRendererUnit;
+
     public enum Direction
     {
         UP,
@@ -27,7 +29,7 @@ public abstract class Unit : MonoBehaviour
 
     protected Direction _optionsMovement;
     public Position _currentPosition;
-
+    /*
     protected Unit(Position positionInitial, int health, int damage, Team team, int moveSpeed)
     {
         _currentPosition = positionInitial;
@@ -35,7 +37,10 @@ public abstract class Unit : MonoBehaviour
         _damage = damage;
         _team = team;
         _moveSpeed = moveSpeed;
+        Renderer();
     }
+    */
+
 
     protected void ChooseNextPosition()
     {
@@ -131,6 +136,22 @@ public abstract class Unit : MonoBehaviour
         gameObject.SetActive(false);
         Board.boardInstance.RemoveUnitToTile(_currentPosition);
     }
+
+    protected void Renderer()
+    {
+        switch (_team)
+        {
+            case Team.RED:
+                _meshRendererUnit.material.color = GameManager.instance.teamRed;
+                break;
+            case Team.BLUE:
+                _meshRendererUnit.material.color = GameManager.instance.teamBlue;
+                break;
+            default:
+                break;
+        }
+    }
+    
 }
 
 

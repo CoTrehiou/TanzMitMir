@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
- 
-
     public static GameManager instance;
+
+    public Color teamRed = Color.red;
+    public Color teamBlue = Color.blue;
 
     //public readonly List<Unit> unitsList = new List<Unit>();
 
