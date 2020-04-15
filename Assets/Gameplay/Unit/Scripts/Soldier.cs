@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Soldier : Unit
 {
-    /*
-    Soldier(Position positionInitial, int health, int damage, Team team, int moveSpeed)
+    public new void Init(int health, int damage, int moveSpeed,Team team)
     {
-        _currentPosition = positionInitial;
-        _health = health;
-        _damage = damage;
-        _team = team;
-        _moveSpeed = moveSpeed;
-        Renderer();
+        base.Init(health, damage, moveSpeed, team);
+        Debug.Log("Soldier ready");
     }
-    */
 }

@@ -29,23 +29,19 @@ public abstract class Unit : MonoBehaviour
 
     protected Direction _optionsMovement;
     public Position _currentPosition;
-    
-    public void Init(int health, int damage, Team team, int moveSpeed)
+
+    public void Init(int health, int damage, int moveSpeed, Team team)
     {
         _currentPosition.X = (int)transform.position.x;
         _currentPosition.Y = (int)transform.position.z;
         _health = health;
         _damage = damage;
-        _team = team;
         _moveSpeed = moveSpeed;
+        _team = team;
         Renderer();
     }
-    
 
-     
-
-
-    protected void ChooseNextPosition()
+    protected virtual void ChooseNextPosition()
     {
         int nextPosition = UnityEngine.Random.Range(0, 4);
         Debug.Log(nextPosition);
@@ -96,7 +92,7 @@ public abstract class Unit : MonoBehaviour
                 Move(x, y);
                 break;
             case Tile.TileState.Unit:
-                Attack(x,y);
+                Attack(x, y);
                 break;
             case Tile.TileState.Wall:
                 break;
@@ -111,7 +107,7 @@ public abstract class Unit : MonoBehaviour
         transform.Translate(new Vector3(x, y));
         Board.boardInstance._tabTiles[x, y].SetStateTile(newPosition, Tile.TileState.Unit);
         Board.boardInstance._tabTiles[_currentPosition.X, _currentPosition.Y].SetStateTile(new Position(_currentPosition.X, _currentPosition.Y), Tile.TileState.Empty);
-        
+
         Board.boardInstance.RemoveUnitToTile(_currentPosition);
         _currentPosition = newPosition;
         Board.boardInstance.AssignUnitToTile(this, _currentPosition);
@@ -128,7 +124,7 @@ public abstract class Unit : MonoBehaviour
     protected void Damaged(int damage)
     {
         _health -= damage;
-        if(_health <= 0)
+        if (_health <= 0)
         {
             Die();
         }
@@ -145,16 +141,16 @@ public abstract class Unit : MonoBehaviour
         switch (_team)
         {
             case Team.RED:
-                _meshRendererUnit.material.color = GameManager.instance.teamRed;
+                _meshRendererUnit.material.color = GameManager.instance.colorTeamRed;
                 break;
             case Team.BLUE:
-                _meshRendererUnit.material.color = GameManager.instance.teamBlue;
+                _meshRendererUnit.material.color = GameManager.instance.colorTeamBlue;
                 break;
             default:
                 break;
         }
     }
-    
+
 }
 
 
