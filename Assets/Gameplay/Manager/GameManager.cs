@@ -12,7 +12,15 @@ public class GameManager : MonoBehaviour
     public Color colorTeamBlue = Color.blue;
 
     [Header("Queen")]
-    [SerializeField] int _damageQueen = 100;
+    [SerializeField] GameObject _queen;
+    [SerializeField] int _queenHealth = 500;
+    [SerializeField] int _queenDamage = 100;
+    [SerializeField] int _queenMoveSpeed = 2;
+
+
+    [Header("Queen positions")]
+    [SerializeField] Transform _positionQueenRed;
+    [SerializeField] Transform _positionQueenBlue;
 
 
     [Header("Soldier")]
@@ -24,11 +32,7 @@ public class GameManager : MonoBehaviour
     [Header("Egg")]
     [SerializeField] GameObject _egg;
 
-
-
-
-
-    //public readonly List<Unit> unitsList = new List<Unit>();
+    List<Unit> _listUnit = new List<Unit>();
 
     void Awake()
     {
@@ -37,13 +41,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        SpawnQueen(_positionQueenRed, Unit.Team.RED);
+        SpawnQueen(_positionQueenBlue, Unit.Team.BLUE);
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            
+        }
     }
 
     public void SpawnEgg(Position _currentPosition, Unit.Team _team)
@@ -58,6 +68,12 @@ public class GameManager : MonoBehaviour
     internal void SpawnSoldier(Vector3 position, Unit.Team eggTeam)
     {
         GameObject o = Instantiate(_soldier, position, Quaternion.identity);
-        o.GetComponent<Soldier>().Init(_soldierHealth, _soldierHealth, _soldierMoveSpeed, eggTeam);
+        o.GetComponent<Soldier>().Init(_soldierHealth, _soldierDamage, _soldierMoveSpeed, eggTeam);
+    }
+
+    private void SpawnQueen(Transform _positionQueen, Unit.Team team)
+    {
+        GameObject o = Instantiate(_queen, _positionQueenRed.position, Quaternion.identity);
+        o.GetComponent<Queen>().Init(_queenHealth, _queenDamage, _queenMoveSpeed, team) ;
     }
 }
