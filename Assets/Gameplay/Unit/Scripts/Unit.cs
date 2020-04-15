@@ -29,17 +29,20 @@ public abstract class Unit : MonoBehaviour
 
     protected Direction _optionsMovement;
     public Position _currentPosition;
-    /*
-    protected Unit(Position positionInitial, int health, int damage, Team team, int moveSpeed)
+    
+    public void Init(int health, int damage, Team team, int moveSpeed)
     {
-        _currentPosition = positionInitial;
+        _currentPosition.X = (int)transform.position.x;
+        _currentPosition.Y = (int)transform.position.z;
         _health = health;
         _damage = damage;
         _team = team;
         _moveSpeed = moveSpeed;
         Renderer();
     }
-    */
+    
+
+     
 
 
     protected void ChooseNextPosition()

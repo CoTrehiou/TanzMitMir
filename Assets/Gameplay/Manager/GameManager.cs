@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public Color teamRed = Color.red;
     public Color teamBlue = Color.blue;
 
+    [Header("Soldier")]
+    [SerializeField] GameObject _soldier;
+
+
     //public readonly List<Unit> unitsList = new List<Unit>();
 
     void Awake()
@@ -19,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+      //  GameObject o = Instantiate(_soldier);
+      //  o.GetComponent<Soldier>().Init();
 
     }
 

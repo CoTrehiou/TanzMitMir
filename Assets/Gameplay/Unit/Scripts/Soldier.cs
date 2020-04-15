@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Soldier : Unit
 {
+    /*
     Soldier(Position positionInitial, int health, int damage, Team team, int moveSpeed)
     {
         _currentPosition = positionInitial;
@@ -13,4 +14,5 @@ public class Soldier : Unit
         _moveSpeed = moveSpeed;
         Renderer();
     }
+    */
 }
