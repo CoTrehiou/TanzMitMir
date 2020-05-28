@@ -15,8 +15,8 @@ public class Egg : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForSeconds(delayEclosion);
-        _soundEclosion.Play();
-        yield return new WaitUntil(() => !_soundEclosion.isPlaying);
+       // _soundEclosion.Play();
+       // yield return new WaitUntil(() => !_soundEclosion.isPlaying);
         GameManager.instance.SpawnSoldier(transform.position, eggTeam);
         Destroy(this);
     }
